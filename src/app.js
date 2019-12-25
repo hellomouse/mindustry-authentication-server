@@ -7,6 +7,8 @@ const { BASE_URL } = require('./config.js');
 
 let app = express();
 
+app.set('trust proxy', 'loopback');
+
 app.use(morgan('combined', {
   stream: {
     write(line) {
