@@ -1,18 +1,26 @@
 module.exports = {
+  extends: [
+    'plugin:react/recommended',
+    '@hellomouse/eslint-config'
+  ],
   parserOptions: {
-    ecmaVersion: 2020,
-    sourceType: 'module'
+    ecmaVersion: 9,
+    sourceType: 'module',
+    ecmaFeatures: {
+      jsx: true
+    }
   },
   env: {
-    node: true,
-    es6: true
+    browser: true,
+    es6: true,
+    node: true
   },
-  extends: ['@hellomouse/eslint-config'],
-  rules: {
-    // doesn't work sometimes
-    'valid-jsdoc': 'off',
-    // typescript takes care of both of these
-    'jsdoc/valid-types': 'off',
-    'jsdoc/no-undefined-types': 'off'
+  plugins: [
+    'react'
+  ],
+  settings: {
+    react: {
+      version: 'detect'
+    }
   }
 };

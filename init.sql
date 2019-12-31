@@ -21,6 +21,18 @@ CREATE TABLE IF NOT EXISTS pending_registrations (
     expires timestamp
 );
 
+CREATE OR REPLACE FUNCTION notify_registration_added()
+    RETURNS trigger AS $notify_registration_added$
+    BEGIN
+        PERFORM pg_notify('registration_added', '"' || NEW.username || '"');
+        RETURN NEW;
+    END;
+$notify_registration_added$ LANGUAGE plpgsql;
+
+CREATE TRIGGER registration_added_trigger
+    AFTER INSERT ON pending_registrations
+    FOR EACH ROW EXECUTE PROCEDURE notify_registration_added();
+
 -- notify application when a registration is updated to successful
 CREATE OR REPLACE FUNCTION notify_registration_success()
     RETURNS trigger AS $notify_registration_success$
