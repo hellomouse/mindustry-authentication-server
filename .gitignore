@@ -58,4 +58,4 @@ typings/
 .env
 
 # web build output
-/public
+/.next

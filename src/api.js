@@ -70,10 +70,6 @@ async function validateSession(req, res) {
   };
 }
 
-// web application
-router.get('/', (req, res) => res.redirect('/app/'));
-router.use('/app/*', express.static('public'));
-
 router.get('/api/info', (req, res) => {
   res.status(200).send({
     status: 'ok',
